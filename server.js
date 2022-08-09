@@ -132,6 +132,83 @@ app.get("/user/:id/picture", (req, res, next) => {
   }
 });
 
+// books api
+
+app.put("/api/book/content/:id", (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+
+  if (!title) {
+    res.status(418).send({ message: "WE NEED TITLE OF THE BOOK" });
+  }
+  res.send("Sucess");
+});
+
+app.post("/api/book/content", (req, res) => {
+  const { title } = req.body;
+
+  if (!title) {
+    res.status(418).send({ message: "WE NEED TITLE OF THE BOOK" });
+  }
+  res.send("Sucess");
+});
+app.get("/api/book/content", (req, res) => {
+  res.status(200).send([
+    {
+      id: 1,
+      title: "PART I  The Psycohistorians",
+    },
+  ]);
+});
+
+app.delete("/api/book/content/:id", (req, res) => {
+  const { id } = req.params;
+  res.send("Sucess");
+});
+
+// book detail api
+
+app.put("/api/book/content/:id/detail", (req, res) => {
+  const { id } = req.params;
+  const { content } = req.body;
+
+  if (!content) {
+    res.status(418).send({ message: "WE NEED TITLE OF THE BOOK" });
+  }
+  res.send("Sucess");
+});
+
+app.post("/api/book/content/:id/detail", (req, res) => {
+  const { content } = req.body;
+
+  if (!content) {
+    res.status(418).send({ message: "WE NEED TITLE OF THE BOOK" });
+  }
+  res.send("Sucess");
+});
+app.get("/api/book/content/detail", (req, res) => {
+  res.status(200).send([
+    {
+      id: 1,
+      content: "PART I  The Psycohistorians",
+    },
+  ]);
+});
+
+app.get("/api/book/content/detail/:id", (req, res) => {
+  res.status(200).send([
+    {
+      id: 1,
+      content: "PART I  The Psycohistorians",
+    },
+  ]);
+});
+
+app.delete("/api/book/content/:id/detail/:detailId", (req, res) => {
+  const { id } = req.params;
+  res.send("Sucess");
+});
+
 function validateToken(req, res, next) {
   //get token from request header
   const authHeader = req.headers["authorization"];
