@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const https = require("https");
 const mongoose = require("mongoose");
 const User = require("./Model/User");
+const Book = require("./Model/bookSchema");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -283,6 +284,41 @@ function Logout(req, res) {
 
   res.status(204).send("Logged out");
 }
+
+//books functions
+
+async function FindAllBook(req, res) {
+  try {
+    Book.find((err, list) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(list);
+      }
+    });
+  } catch (err) {
+    console.error(`Error while getting all books:`, err.message);
+  }
+}
+
+async function PostNewBok(req, res) {
+  const book = new Book({
+    title: req.body.title,
+    content: req.body.content,
+  });
+  book.save().catch((err) => res.send(err));
+}
+
+async function DeleteBook(req, res) {
+  try {
+    Book.deleteOne({ _id: req.params.id }, function (err, list) {
+      res.send("sucess");
+    });
+  } catch (err) {
+    console.error(`Error while deleting user by ID:`, err.message);
+  }
+}
+
 module.exports = {
   PostNewUser,
   PostLogin,
@@ -295,4 +331,7 @@ module.exports = {
   GetUserPicture,
   RefreshToken,
   Logout,
+  FindAllBook,
+  PostNewBok,
+  DeleteBook,
 };

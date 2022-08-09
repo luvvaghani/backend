@@ -145,25 +145,29 @@ app.put("/api/book/content/:id", (req, res) => {
 });
 
 app.post("/api/book/content", (req, res) => {
-  const { title } = req.body;
+  const { title, content } = req.body;
 
-  if (!title) {
-    res.status(418).send({ message: "WE NEED TITLE OF THE BOOK" });
+  if (!title || !content) {
+    res.status(418).send({ message: "WE NEED TITLE AND CONTENT OF THE BOOK" });
   }
+  controller.PostNewBok(req, res);
   res.send("Sucess");
 });
+
 app.get("/api/book/content", (req, res) => {
-  res.status(200).send([
-    {
-      id: 1,
-      title: "PART I  The Psycohistorians",
-    },
-  ]);
+  if (req) {
+    controller.FindAllBook(req, res);
+  } else {
+    throw new Error("request cannot be empty");
+  }
 });
 
 app.delete("/api/book/content/:id", (req, res) => {
   const { id } = req.params;
-  res.send("Sucess");
+  if (!id) {
+    res.status(418).send({ message: "WE NEED ID OF THE BOOK" });
+  }
+  controller.DeleteBook(req, res);
 });
 
 // book detail api
@@ -206,6 +210,7 @@ app.get("/api/book/content/detail/:id", (req, res) => {
 
 app.delete("/api/book/content/:id/detail/:detailId", (req, res) => {
   const { id } = req.params;
+
   res.send("Sucess");
 });
 
