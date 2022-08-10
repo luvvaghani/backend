@@ -135,12 +135,12 @@ app.get("/user/:id/picture", (req, res, next) => {
 // books api
 
 app.put("/api/book/content/:id", (req, res) => {
-  const { id } = req.params;
-  const { title } = req.body;
+  const { title, content } = req.body;
 
-  if (!title) {
+  if (!title & !content) {
     res.status(418).send({ message: "WE NEED TITLE OF THE BOOK" });
   }
+  controller.UpdateBookDetail(req, res);
   res.send("Sucess");
 });
 
@@ -162,6 +162,41 @@ app.get("/api/book/content", (req, res) => {
   }
 });
 
+//For kane to work
+app.get("/api/book/content/:id", (req, res) => {
+  // if (req) {
+  //   controller.FindAllBook(req, res);
+  // } else {
+  //   throw new Error("request cannot be empty");
+  // }
+});
+
+//For Emad to work
+app.get("/api/book/content/count", (req, res) => {
+  // if (req) {
+  //   controller.FindAllBook(req, res);
+  // } else {
+  //   throw new Error("request cannot be empty");
+  // }
+});
+
+// Hemantsingh to worker
+app.get("/api/book/content/:title", (req, res) => {
+  // if (req) {
+  //   controller.FindAllBook(req, res);
+  // } else {
+  //   throw new Error("request cannot be empty");
+  // }
+});
+
+//Luv's  to worker
+app.get("/api/book/content/title", (req, res) => {
+  // if (req) {
+  //   controller.FindAllBook(req, res);
+  // } else {
+  //   throw new Error("request cannot be empty");
+  // }
+});
 app.delete("/api/book/content/:id", (req, res) => {
   const { id } = req.params;
   if (!id) {

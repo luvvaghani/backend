@@ -301,6 +301,57 @@ async function FindAllBook(req, res) {
   }
 }
 
+//kane's work
+async function FindBookById(req, res) {
+  // try {
+  //   Book.FindById((err, list) => {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(list);
+  //     }
+  //   });
+  // } catch (err) {
+  //   console.error(`Error while getting all books:`, err.message);
+  // }
+}
+
+// Emad's worker
+function GetTotalCountOfTheBook(req, res) {
+  //get the total number of books
+}
+
+// Hemantsingh work
+async function FindBookByTitle(req, res) {
+  // try {
+  //   Book.FindById((err, list) => {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(list);
+  //     }
+  //   });
+  // } catch (err) {
+  //   console.error(`Error while getting all books:`, err.message);
+  // }
+}
+
+//Luv's worker
+//only get the content tiltle and ID , not the actual content
+async function GetContentTitle(req, res) {
+  // try {
+  //   Book.FindById((err, list) => {
+  //     if (err) {
+  //       res.send(err);
+  //     } else {
+  //       res.send(list);
+  //     }
+  //   });
+  // } catch (err) {
+  //   console.error(`Error while getting all books:`, err.message);
+  // }
+}
+
 async function PostNewBok(req, res) {
   const book = new Book({
     title: req.body.title,
@@ -319,6 +370,19 @@ async function DeleteBook(req, res) {
   }
 }
 
+async function UpdateBookDetail(req, res) {
+  Book.updateOne(
+    { _id: req.params.id },
+    {
+      $set: {
+        _id: req.params.id,
+        title: req.body.title,
+        content: req.body.content,
+      },
+    }
+  ).catch((err) => res.send(err));
+}
+
 module.exports = {
   PostNewUser,
   PostLogin,
@@ -334,4 +398,5 @@ module.exports = {
   FindAllBook,
   PostNewBok,
   DeleteBook,
+  UpdateBookDetail,
 };
