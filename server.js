@@ -7,6 +7,8 @@ require("dotenv").config();
 const controller = require("./serverController");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const bookSchema = require("./Model/bookSchema");
+const { count } = require("console");
 
 //app
 const app = express();
@@ -172,12 +174,12 @@ app.get("/api/book/content/:id", (req, res) => {
 });
 
 //For Emad to work
-app.get("/api/book/content/count", (req, res) => {
-  // if (req) {
-  //   controller.FindAllBook(req, res);
-  // } else {
-  //   throw new Error("request cannot be empty");
-  // }
+app.get("/api/book/content/count/:id", (req, res) => {
+  if (req) {
+    controller.GetTotalCountOfTheBook(req, res);
+  } else {
+    throw new Error("request cannot be empty");
+  }
 });
 
 // Hemantsingh to worker
