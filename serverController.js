@@ -323,17 +323,20 @@ function GetTotalCountOfTheBook(req, res) {
 
 // Hemantsingh work
 async function FindBookByTitle(req, res) {
-  // try {
-  //   Book.FindById((err, list) => {
-  //     if (err) {
-  //       res.send(err);
-  //     } else {
-  //       res.send(list);
-  //     }
-  //   });
-  // } catch (err) {
-  //   console.error(`Error while getting all books:`, err.message);
-  // }
+  try {
+    Book.find((err, list) => {
+      if (err) {
+        res.send(err);
+      } else {
+        x = list.filter((name) =>
+          name.title.toLowerCase().includes(req.params.title.toLowerCase())
+        );
+        res.send(x);
+      }
+    });
+  } catch (err) {
+    console.error(`Error while getting all books:`, err.message);
+  }
 }
 
 //Luv's worker
@@ -344,13 +347,12 @@ async function GetContentTitle(req, res) {
       if (err) {
         res.send(err);
       } else {
-        let listObject=[]
-        list.forEach(element => {
-          listObject.push({id:element.id,title:element.title})
+        let listObject = [];
+        list.forEach((element) => {
+          listObject.push({ id: element.id, title: element.title });
         });
         res.send(listObject);
       }
-      
     });
   } catch (err) {
     console.error(`Error while getting all books:`, err.message);
@@ -404,5 +406,6 @@ module.exports = {
   PostNewBok,
   DeleteBook,
   UpdateBookDetail,
-  GetContentTitle
+  GetContentTitle,
+  FindBookByTitle,
 };
