@@ -190,13 +190,14 @@ app.get("/api/book/content/:title", (req, res) => {
 });
 
 //Luv's  to worker
-app.get("/api/book/content/title", (req, res) => {
-  // if (req) {
-  //   controller.FindAllBook(req, res);
-  // } else {
-  //   throw new Error("request cannot be empty");
-  // }
+app.get("/api/book/title", (req, res) => {
+  if (req) {
+    controller.GetContentTitle(req, res);
+  } else {
+    throw new Error("request cannot be empty");
+  }
 });
+
 app.delete("/api/book/content/:id", (req, res) => {
   const { id } = req.params;
   if (!id) {

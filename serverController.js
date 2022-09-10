@@ -339,17 +339,22 @@ async function FindBookByTitle(req, res) {
 //Luv's worker
 //only get the content tiltle and ID , not the actual content
 async function GetContentTitle(req, res) {
-  // try {
-  //   Book.FindById((err, list) => {
-  //     if (err) {
-  //       res.send(err);
-  //     } else {
-  //       res.send(list);
-  //     }
-  //   });
-  // } catch (err) {
-  //   console.error(`Error while getting all books:`, err.message);
-  // }
+  try {
+    Book.find((err, list) => {
+      if (err) {
+        res.send(err);
+      } else {
+        let listObject=[]
+        list.forEach(element => {
+          listObject.push({id:element.id,title:element.title})
+        });
+        res.send(listObject);
+      }
+      
+    });
+  } catch (err) {
+    console.error(`Error while getting all books:`, err.message);
+  }
 }
 
 async function PostNewBok(req, res) {
@@ -399,4 +404,5 @@ module.exports = {
   PostNewBok,
   DeleteBook,
   UpdateBookDetail,
+  GetContentTitle
 };
