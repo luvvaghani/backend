@@ -414,4 +414,5 @@ module.exports = {
   UpdateBookDetail,
   GetContentTitle,
   FindBookByTitle,
+  FindBookById,
 };
