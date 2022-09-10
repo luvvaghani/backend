@@ -303,19 +303,19 @@ async function FindAllBook(req, res) {
 
 //kane's work
 async function FindBookById(req, res) {
-  
-  // try {
-  //   Book.FindById((err, list) => {
-  //     if (err) {
-  //       res.send(err);
-  //     } else {
-  //       res.send(list);
-  //     }
-  //   });
-  // } catch (err) {
-  //   console.error(`Error while getting all books:`, err.message);
-  // }
+  try {
+    Book.findById({ _id: req.params.id }, (err, list) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(list);
+      }
+    });
+  } catch (err) {
+    console.error(`Error while getting Book:`, err.message);
+  }
 }
+//test
 
 // Emad's worker
 async function GetTotalCountOfTheBook(req, res) {
@@ -323,7 +323,7 @@ async function GetTotalCountOfTheBook(req, res) {
     res.send((await Book.count("id")).toString());
   } catch (err) {
     console.error(`Error while counting books:`, err.message);
-  } 
+  }
 }
 
 // Hemantsingh work
