@@ -303,6 +303,7 @@ async function FindAllBook(req, res) {
 
 //kane's work
 async function FindBookById(req, res) {
+  
   // try {
   //   Book.FindById((err, list) => {
   //     if (err) {
@@ -317,8 +318,12 @@ async function FindBookById(req, res) {
 }
 
 // Emad's worker
-function GetTotalCountOfTheBook(req, res) {
-  //get the total number of books
+async function GetTotalCountOfTheBook(req, res) {
+  try {
+    res.send((await Book.count("id")).toString());
+  } catch (err) {
+    console.error(`Error while counting books:`, err.message);
+  } 
 }
 
 // Hemantsingh work
@@ -403,6 +408,7 @@ module.exports = {
   RefreshToken,
   Logout,
   FindAllBook,
+  GetTotalCountOfTheBook,
   PostNewBok,
   DeleteBook,
   UpdateBookDetail,
